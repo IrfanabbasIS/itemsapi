@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Items API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: 50px auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .result {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Items API Demo</h2>
+
+        <!-- Add Item Form -->
+        <form action="/ui/add" method="post">
+            <h3>Add New Item</h3>
+
+            <label>ID:</label>
+            <input type="number" name="id">
+
+            <label>Name:</label>
+            <input type="text" name="name">
+
+            <label>Description:</label>
+            <input type="text" name="description">
+
+            <button type="submit">Add Item</button>
+        </form>
+
+        <!-- Get Item Form -->
+        <form action="/ui/get" method="get">
+            <h3>Get Item by ID</h3>
+
+            <label>Item ID:</label>
+            <input type="number" name="id">
+
+            <button type="submit">Get Item</button>
+        </form>
+
+        <!-- Success / Error Messages -->
+        <div th:if="${success}" class="message success">
+            <p th:text="${success}"></p>
+        </div>
+        <div th:if="${error}" class="message error">
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- Display Item Details -->
+        <div th:if="${item != null}" class="result">
+            <h4>Item Details</h4>
+            <p><b>ID:</b> <span th:text="${item.id}"></span></p>
+            <p><b>Name:</b> <span th:text="${item.name}"></span></p>
+            <p><b>Description:</b> <span th:text="${item.description}"></span></p>
+        </div>
+    </div>
+</body>
+</html>
